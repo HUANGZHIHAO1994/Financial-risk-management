@@ -20,24 +20,35 @@ def cov_matrix_with_market(x_matrix):
     ex_matrix = Is.ex_matrix_compute(day_yield_matrix, ex_numpy_vector)
     x_ex_matrix = day_yield_matrix - ex_matrix
     cov_matrix_numpy = Is.cov_matrix_compute(x_ex_matrix)
-    return cov_matrix_numpy
+    return cov_matrix_numpy, day_yield_matrix
 
 
 if __name__ == '__main__':
     x_matrix_sample = random_sample_stock()
-    cov_matrix = cov_matrix_with_market(x_matrix_sample)
+    print(x_matrix_sample)
+    cov_matrix, day_yield_matrix_market = cov_matrix_with_market(x_matrix_sample)
     cov_between_stock_market, market_variance = cov_matrix[-1][:-1], cov_matrix[-1][-1]
     beta_of_five_stocks = cov_between_stock_market / market_variance
-    # 做OLS回归检验alpha（GRS检验是要分组的）
-    _, day_avg_yield = Is.ex_vector_compute(x_matrix_sample)
-    annual_rate = day_avg_yield * x_matrix_sample.shape[0] / 10
-    y = annual_rate[:-1] - RISK_FREE_RATE
-    x = beta_of_five_stocks * (annual_rate[-1] - RISK_FREE_RATE)
-    # x = np.ones(beta_of_five_stocks.shape) * (annual_rate[-1] - RISK_FREE_RATE)
-    # print(x)
+    filename = os.path.join(os.getcwd(), 'beta')
+    if not os.path.exists(filename):
+        os.makedirs(filename)
+    with open("./beta/beta.txt", 'w') as f:
+        f.write(str(beta_of_five_stocks))
 
-    x = sm.add_constant(x)
-    model = sm.OLS(y, x)
+    # # 做OLS回归检验alpha（GRS检验是要分组的）
+    risk_free_rate_day = RISK_FREE_RATE / (x_matrix_sample.shape[0] / 10)
+    R_i_R_m = day_yield_matrix_market.to_numpy() - risk_free_rate_day
+    y = []
+    beta_R_m = []
+    R_m = day_yield_matrix_market.to_numpy().T[-1]
+    for beta in beta_of_five_stocks:
+        beta_R_m += (beta * R_m).tolist()
+
+    for i in day_yield_matrix_market.to_numpy().T[:-1]:
+        y += i.tolist()
+
+    beta_R_m = sm.add_constant(beta_R_m)
+    model = sm.OLS(y, beta_R_m)
     results = model.fit()
     filename = os.path.join(os.getcwd(), 'alpha_test')
     if not os.path.exists(filename):

@@ -157,7 +157,7 @@ class InvestmentStrategy:
             filename = os.path.join(os.getcwd(), 'images')
             if not os.path.exists(filename):
                 os.makedirs(filename)
-            plt.figure(figsize=(15, 9))
+            plt.figure(figsize=(8, 6))
             plt.style.use('seaborn-dark')
             plt.rcParams['savefig.dpi'] = 300  # 图片像素
             plt.rcParams['figure.dpi'] = 300  # 分辨率
