@@ -1,0 +1,82 @@
+.
+├── alpha_test
+│   └── alpha_test.txt
+├── Binary_Tree.py
+├── compare
+│   ├── compare_Markowitz.txt
+│   ├── compare_MontoCarlo_alpha0.txt
+│   └── compare_MontoCarlo.txt
+├── config.py
+├── draw_tree_picture.py
+├── Homework1.pdf
+├── hw1_1.py
+├── hw1_2.py
+├── hw1_3.py
+├── HW1.xlsx
+├── images
+│   ├── HS300与Markowitz投资组合收益比较：20150105--20150630.png
+│   ├── HS300与Markowitz投资组合收益比较：20150105--20191230.png
+│   ├── HS300与Markowitz投资组合收益比较：20150701--20151231.png
+│   ├── HS300与Markowitz投资组合收益比较：20160104--20160630.png
+│   ├── HS300与Markowitz投资组合收益比较：20160701--20161230.png
+│   ├── HS300与Markowitz投资组合收益比较：20170103--20170630.png
+│   ├── HS300与Markowitz投资组合收益比较：20170703--20171229.png
+│   ├── HS300与Markowitz投资组合收益比较：20180102--20180629.png
+│   ├── HS300与Markowitz投资组合收益比较：20180702--20181228.png
+│   ├── HS300与Markowitz投资组合收益比较：20190102--20190628.png
+│   ├── HS300与Markowitz投资组合收益比较：20190701--20191230.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20150105--20150630.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20150105--20191230.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20150701--20151231.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20160104--20160630.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20160701--20161230.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20170103--20170630.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20170703--20171229.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20180102--20180629.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20180702--20181228.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20190102--20190628.png
+│   ├── HS300与MontoCarlo_alpha0投资组合收益比较：20190701--20191230.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20150105--20150630.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20150105--20191230.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20150701--20151231.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20160104--20160630.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20160701--20161230.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20170103--20170630.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20170703--20171229.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20180102--20180629.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20180702--20181228.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20190102--20190628.png
+│   ├── HS300与MontoCarlo投资组合收益比较：20190701--20191230.png
+│   ├── Montacarlo_CAL_50000_20100104_20141231.png
+│   ├── Montacarlo_CAL_50000_20100701_20150630.png
+│   ├── Montacarlo_CAL_50000_20110104_20151231.png
+│   ├── Montacarlo_CAL_50000_20110701_20160630.png
+│   ├── Montacarlo_CAL_50000_20120104_20161230.png
+│   ├── Montacarlo_CAL_50000_20120702_20170630.png
+│   ├── Montacarlo_CAL_50000_20130104_20171229.png
+│   ├── Montacarlo_CAL_50000_20130701_20180629.png
+│   ├── Montacarlo_CAL_50000_20140102_20181228.png
+│   └── Montacarlo_CAL_50000_20140701_20190628.png
+├── option_result
+│   ├── binarytree_american_put_100_step.txt
+│   ├── binarytree_european_put_100_step.txt
+│   ├── binarytree_european_put_10_step
+│   ├── binarytree_european_put_10_step.pdf
+│   ├── binarytree_european_put_10_step.png
+│   ├── binarytree_european_put_10_step.txt
+│   ├── binarytree_european_put_50_step.txt
+│   └── black_scholes_put.txt
+├── project_structure.txt
+├── __pycache__
+│   ├── Binary_Tree.cpython-36.pyc
+│   ├── config.cpython-36.pyc
+│   ├── draw_tree_picture.cpython-36.pyc
+│   └── hw1_1.cpython-36.pyc
+├── requirements.txt
+└── weights
+    ├── weights_Markowitz.pickle
+    ├── weights_Markowitz.txt
+    ├── weights_MontoCarlo.pickle
+    └── weights_MontoCarlo.txt
+
+6 directories, 73 files
