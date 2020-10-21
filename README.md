@@ -1,13 +1,15 @@
 <div align="left">
     <img src='https://ftp.bmp.ovh/imgs/2020/08/b77a8439ea51e080.jpg' height="50" width="50" >
 </div>
+
+
 # 一、涉及内容
 
 第一次作业涉及：
 
-- **投资组合理论（第一题）：**马科维茨（Markowitz）投资组合二次规划求解、蒙特卡洛方法求解有效前沿、资本市场线、动态调整权重
-- **CAPM模型（第二题）：**Beta系数求解、alpha检验、GRS检验
-- **期权定价模型（第三题）：**n步二叉树欧式美式看涨看跌期权定价、Black Scholes公式（BS公式）看涨看跌期权定价
+- **投资组合理论（第一题）：** 马科维茨（Markowitz）投资组合二次规划求解、蒙特卡洛方法求解有效前沿、资本市场线、动态调整权重
+- **CAPM模型（第二题）：** Beta系数求解、alpha检验、GRS检验
+- **期权定价模型（第三题）：** n步二叉树欧式美式看涨看跌期权定价、Black Scholes公式（BS公式）看涨看跌期权定价
 
 
 
@@ -22,18 +24,18 @@
 │   └── alpha_test.txt
 ├── beta
 │   └── beta.txt
-==├── Binary_Tree.py==
+├── Binary_Tree.py
 ├── compare
 │   ├── compare_Markowitz.txt
 │   ├── compare_MontoCarlo_alpha0.txt
 │   └── compare_MontoCarlo.txt
-==├── config.py==
-==├── draw_tree_picture.py==
-==├── Homework1.pdf==
-==├── hw1_1.py==
-==├── hw1_2.py==
-==├── hw1_3.py==
-==├── HW1.xlsx==
+├── config.py
+├── draw_tree_picture.py
+├── Homework1.pdf
+├── hw1_1.py
+├── hw1_2.py
+├── hw1_3.py
+├── HW1.xlsx
 ├── images
 │   ├── HS300与Markowitz投资组合收益比较：20150105--20150630.png
 │   ├── HS300与Markowitz投资组合收益比较：20150105--20191230.png
@@ -93,7 +95,7 @@
 │   ├── config.cpython-36.pyc
 │   ├── draw_tree_picture.cpython-36.pyc
 │   └── hw1_1.cpython-36.pyc
-==├── requirements.txt==
+├── requirements.txt
 └── weights
     ├── weights_Markowitz.pickle
     ├── weights_Markowitz.txt
@@ -107,7 +109,7 @@
 
 其中，以下是主要文件：
 
-**config.py**是三道题都使用的全局变量文件，**HW1.xlsx**是前两题使用的数据文件，第一题使用**hw1_1.py**，第二题使用**hw1_1.py**和**hw1_2.py**，第三题使用**hw1_3.py、Binary_Tree.py、draw_tree_picture.py**（后两个用来画二叉树）
+**config.py** 是三道题都使用的全局变量文件， **HW1.xlsx** 是前两题使用的数据文件，第一题使用 **hw1_1.py** ，第二题使用 **hw1_1.py** 和 **hw1_2.py** ，第三题使用 **hw1_3.py、Binary_Tree.py、draw_tree_picture.py** （后两个用来画二叉树）
 
 ## 2. 环境
 
@@ -256,7 +258,7 @@ def compute_weight(self, x_matrix, total_days=252, method="Markowitz", starttime
 
 
 
-该策略与HS300表现比较（仅以第一期20150105--20150630和总投资期20150105--20191230为例，更多结果请见**images**文件夹）：
+该策略与HS300表现比较（仅以第一期20150105--20150630和总投资期20150105--20191230为例，更多结果请见 **images** 文件夹）：
 
 
 
@@ -324,7 +326,7 @@ def compute_weight(self, x_matrix, total_days=252, method="Markowitz", starttime
 
 
 
-该策略与HS300表现比较（仅以第一期20150105--20150630和总投资期20150105--20191230为例，更多结果请见**images**文件夹）：
+该策略与HS300表现比较（仅以第一期20150105--20150630和总投资期20150105--20191230为例，更多结果请见 **images** 文件夹）：
 
 ![HS300与MontoCarlo投资组合收益比较：20150105--20150630](https://ftp.bmp.ovh/imgs/2020/10/cd5e68c56af7127b.png)
 
@@ -356,7 +358,7 @@ def compute_weight(self, x_matrix, total_days=252, method="Markowitz", starttime
 
 
 
-该策略与HS300表现比较（仅以第一期20150105--20150630和总投资期20150105--20191230为例，更多结果请见**images**文件夹）：
+该策略与HS300表现比较（仅以第一期20150105--20150630和总投资期20150105--20191230为例，更多结果请见 **images** 文件夹）：
 
 ![HS300与MontoCarlo_alpha0投资组合收益比较：20150105--20150630](https://ftp.bmp.ovh/imgs/2020/10/5833e56b5dd993e6.png)
 
@@ -567,13 +569,13 @@ $$
 
 ### 2.2 计算结果
 
-**美式看跌100步：**Option price: 3.7557436745895885
+**美式看跌100步：** Option price: 3.7557436745895885
 
-**欧式看跌100步：**Option price: 3.667340740092775
+**欧式看跌100步：** Option price: 3.667340740092775
 
-**欧式看跌50步：**Option price: 3.6570804703496114
+**欧式看跌50步：** Option price: 3.6570804703496114
 
-**欧式看跌10步：**Option price: 3.5760697183104884
+**欧式看跌10步：** Option price: 3.5760697183104884
 
 
 
@@ -609,11 +611,9 @@ $$
 
 ### 3.2 结果
 
-**BS公式欧式看跌：**Option price: 3.677627713214079
+**BS公式欧式看跌：** Option price: 3.677627713214079
 
 可以看出二叉树结果在步数增大时逐步逼近了BS公式结果
-
-
 
 
 
