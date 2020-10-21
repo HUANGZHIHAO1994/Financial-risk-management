@@ -185,15 +185,27 @@ def ex_vector_compute(x_matrix):
 
 
 
+<div>
 $$
-\left\{
 \begin{align}
 	\Sigma  
 	& = E((X-EX)^T(X-EX)) \\
 	& = \frac{1}{n-1}((X-EX)^T(X-EX)) \tag{2}
 \end{align}
-\right\}
 $$
+</div>
+
+
+
+<div>
+$$
+(X-EX)_{n\times50}=\left(\begin{matrix} x_{1,1}-Ex_{1} & x_{2,1}-Ex_{2} & \cdots & x_{50,1}-Ex_{50}\\\
+        x_{1,2}-Ex_{1} & x_{2,2}-Ex_{2} & \cdots & x_{50,2}-Ex_{50} \\\
+        \vdots & \vdots & \ddots & \vdots \\\
+        x_{1,n}-Ex_{1} & x_{2,n}-Ex_{2} & \cdots & x_{50,n}-Ex_{50} \end{matrix}\right)
+$$
+</div>
+
 
 
 $$
@@ -245,6 +257,21 @@ def save_weights_markowitz(self):
 ### 5.1 Markowitz投资组合方法
 
 由于Markowitz投资组合理论没有用到无风险利率，因此这种方法并不会用到3%的无风险利率，而   $r_{target}$ 是题中给出的10%期望目标收益，该方法求解如下二次规划问题（题中可以shorting，w可以为负），相关向量和矩阵符号与公式[(1)](#jump)、[(2)](#jump2)一致。可通过 **cvxpy** 或 **cvxopt** 两个包实现求解，具体可见 `compute_weight` 方法：
+
+<div>
+$$
+\begin{alignat*}{2}
+\min_{\vec{w}} \quad & \frac{1}{2}\vec{w}^T \Sigma \vec{w} \\
+\mbox{s.t.}\quad
+&\vec{w}^T\vec{r} = r_{target} \\
+&\vec{1}^T\vec{w} = 1 
+\end{alignat*}
+$$
+</div>
+
+
+
+
 $$
 \left\{
 \begin{alignat*}{2}
