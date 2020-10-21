@@ -1,10 +1,11 @@
-[-2.17250249e-04  9.99993006e-01]                            OLS Regression Results                            
+[-2.17250249e-04  9.99993006e-01]
+                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                      y   R-squared:                       0.411
 Model:                            OLS   Adj. R-squared:                  0.411
 Method:                 Least Squares   F-statistic:                     8487.
-Date:                Tue, 20 Oct 2020   Prob (F-statistic):               0.00
-Time:                        17:22:08   Log-Likelihood:                 31487.
+Date:                Wed, 21 Oct 2020   Prob (F-statistic):               0.00
+Time:                        01:51:31   Log-Likelihood:                 31487.
 No. Observations:               12145   AIC:                        -6.297e+04
 Df Residuals:                   12143   BIC:                        -6.295e+04
 Df Model:                           1                                         

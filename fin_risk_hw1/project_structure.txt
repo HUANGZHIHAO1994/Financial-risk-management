@@ -1,6 +1,9 @@
 .
 ├── alpha_test
+│   ├── alpha_test_GRS.txt
 │   └── alpha_test.txt
+├── beta
+│   └── beta.txt
 ├── Binary_Tree.py
 ├── compare
 │   ├── compare_Markowitz.txt
@@ -79,4 +82,4 @@
     ├── weights_MontoCarlo.pickle
     └── weights_MontoCarlo.txt
 
-6 directories, 73 files
+7 directories, 75 files

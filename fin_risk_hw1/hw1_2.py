@@ -3,6 +3,8 @@ from hw1_1 import InvestmentStrategy as Is
 from config import RISK_FREE_RATE, DATAPATH, EXPECTED_RETURN
 import statsmodels.api as sm
 import os
+from finance_byu.statistics import GRS
+from tabulate import tabulate
 import numpy as np
 
 
@@ -35,7 +37,7 @@ if __name__ == '__main__':
     with open("./beta/beta.txt", 'w') as f:
         f.write(str(beta_of_five_stocks))
 
-    # # 做OLS回归检验alpha（GRS检验是要分组的）
+    # # 做OLS回归检验alpha
     risk_free_rate_day = RISK_FREE_RATE / (x_matrix_sample.shape[0] / 10)
     R_i_R_m = day_yield_matrix_market.to_numpy() - risk_free_rate_day
     y = []
@@ -46,15 +48,32 @@ if __name__ == '__main__':
 
     for i in day_yield_matrix_market.to_numpy().T[:-1]:
         y += i.tolist()
+    print(len(y))
 
     beta_R_m = sm.add_constant(beta_R_m)
     model = sm.OLS(y, beta_R_m)
     results = model.fit()
+
     filename = os.path.join(os.getcwd(), 'alpha_test')
     if not os.path.exists(filename):
         os.makedirs(filename)
     with open("./alpha_test/alpha_test.txt", 'w') as f:
-        f.write(str(results.params))
+        f.write(str(results.params) + '\n')
         f.write(str(results.summary()))
     print(results.params)
     print(results.summary())
+
+    # GRS检验: https://fin-library.readthedocs.io/en/latest/statistics.html#statistics
+    df = day_yield_matrix_market - risk_free_rate_day
+    df = df.rename(columns={22: 'stock1', 2: 'stock2', 49: 'stock3', 26: 'stock4', 33: 'stock5'})
+    grsstat, pval, tbl = GRS(df, ['stock1', 'stock2', 'stock3', 'stock4', 'stock5'], ['Market'])
+    filename = os.path.join(os.getcwd(), 'alpha_test')
+    if not os.path.exists(filename):
+        os.makedirs(filename)
+    with open("./alpha_test/alpha_test_GRS.txt", 'w') as f:
+        f.write("grsstat: " + str(grsstat) + "\n")
+        f.write("pval: " + str(pval) + "\n")
+        f.write(str(tabulate(tbl.render(), tablefmt='github', headers=tbl.render().columns)) + "\n")
+    print("grsstat: " + str(grsstat))
+    print("pval: " + str(pval))
+    print(tabulate(tbl.render(), tablefmt='github', headers=tbl.render().columns))
