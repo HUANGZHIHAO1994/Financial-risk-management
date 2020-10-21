@@ -3,6 +3,20 @@
 </div>
 
 
+# 公式显示问题
+
+- 在github上看本页公式
+
+Chrome浏览器扩展程序：[GitHub with MathJax](https://www.crx4chrome.com/crx/119782/) ，打开网址后选择 Available in the [Chrome Web Store >](https://chrome.google.com/webstore/detail/ioemnmodlmafdkllaclgeombjnmnbima?utm_source=www.crx4chrome.com)
+
+- fork之后下载到本地看
+
+**README.md**  由于公式对齐，矩阵显示等问题，做了HTML兼容，本地查看不了相关公式，可通过项目文件中 **Report_complete.md** 查看
+
+
+
+
+
 # 一、涉及内容
 
 第一次作业涉及：
@@ -185,23 +199,26 @@ def ex_vector_compute(x_matrix):
 
 
 
+<div>
 $$
-\left\{
-\begin{align}
+\begin{align*}
 	\Sigma  
 	& = E((X-EX)^T(X-EX)) \\
-	& = \frac{1}{n-1}((X-EX)^T(X-EX)) \tag{2}
-\end{align}
-\right\}
+	& = \frac{1}{n-1}((X-EX)^T(X-EX)) \tag{2} \\
+\end{align*}
 $$
+</div>
 
 
+
+<div>
 $$
 (X-EX)_{n\times50}=\left(\begin{matrix} x_{1,1}-Ex_{1} & x_{2,1}-Ex_{2} & \cdots & x_{50,1}-Ex_{50}\\\
         x_{1,2}-Ex_{1} & x_{2,2}-Ex_{2} & \cdots & x_{50,2}-Ex_{50} \\\
         \vdots & \vdots & \ddots & \vdots \\\
         x_{1,n}-Ex_{1} & x_{2,n}-Ex_{2} & \cdots & x_{50,n}-Ex_{50} \end{matrix}\right)
 $$
+</div>
 
 
 
@@ -245,16 +262,19 @@ def save_weights_markowitz(self):
 ### 5.1 Markowitz投资组合方法
 
 由于Markowitz投资组合理论没有用到无风险利率，因此这种方法并不会用到3%的无风险利率，而   $r_{target}$ 是题中给出的10%期望目标收益，该方法求解如下二次规划问题（题中可以shorting，w可以为负），相关向量和矩阵符号与公式[(1)](#jump)、[(2)](#jump2)一致。可通过 **cvxpy** 或 **cvxopt** 两个包实现求解，具体可见 `compute_weight` 方法：
+
+<div>
 $$
-\left\{
 \begin{alignat*}{2}
 \min_{\vec{w}} \quad & \frac{1}{2}\vec{w}^T \Sigma \vec{w} \\
 \mbox{s.t.}\quad
 &\vec{w}^T\vec{r} = r_{target} \\
 &\vec{1}^T\vec{w} = 1 
 \end{alignat*}
-\right\}
 $$
+</div>
+
+
 
 
 ```python
@@ -301,20 +321,25 @@ def compute_weight(self, x_matrix, total_days=252, method="Markowitz", starttime
 
 这个方法通过求解下式最优化问题获取权重，由于分母有w的二次项，目前只能通过蒙特卡洛数值方法逼近最优解。具体抽样方法为：从 $N(1/50,1)$ 中随机抽取49个权重，最后一个权重通过1减去前49个之和得到。
 
-需要注意的是这里的  $r_{f_{day}}$ 不再是3%，因为 $\bar{r_{p}}，\sigma_{p}$ 都是日度单位，此处采用 平均每年天数=5年交易日总天数/5，无风险日利率=3%/平均每年天数。获取最优市场组合权重之后，通过结合无风险日利率制作资本市场线，
+需要注意的是这里的  $r_{f_{day}}$ 不再是3%，因为 $\bar{r_{p}}，\sigma_{p}$ 都是日度单位，此处采用 平均每年天数=5年交易日总天数/5，无风险日利率=3%/平均每年天数。获取最优市场组合权重之后，通过结合无风险日利率制作资本市场线
+
+
+
+<div>
 $$
-\left\{
 \begin{alignat*}{2}
 \max_{\vec{w}}\quad & Sharpe\ ratio =tan \theta = \frac{\bar{r_{p}}-r_{f_{day}}}{\sigma_{p}} \\
-\mbox{s.t.}\quad
-
-&\vec{1}^T\vec{w} = 1 \\
+\mbox{s.t.}\quad & \vec{1}^T\vec{w} = 1 \\
 &\bar{r_{p}}=\vec{w}^{T}\vec{r} \\
 &\sigma_{p}=\sqrt{\vec{w}^T \Sigma \vec{w}}
-
 \end{alignat*}
-\right\}
 $$
+</div>
+
+
+
+
+
 相关资本市场线和有效前沿（仅以第一期20100104_20141231为例，更多结果请见**images**文件夹）：
 
 ![Montacarlo_CAL_50000_20100104_20141231](https://ftp.bmp.ovh/imgs/2020/10/5ce2f97faabb3d6f.png)
@@ -412,6 +437,8 @@ $$
 \beta_i=\frac{\sigma_{i,M}}{\sigma_{M}^2}
 $$
 可以看出，计算 $\beta$ 的要素全在协方差矩阵之中，将HS300加入数据框之后，再利用第一题的协方差矩阵计算方法，直接可求得5只股票同市场组合的协方差阵：
+
+<div>
 $$
 \Sigma_{5,M}=\left(\begin{matrix}
         \sigma_{1}^2 & \sigma_{1,2} & \cdots & \sigma_{1,M}\\
@@ -420,6 +447,10 @@ $$
         \sigma_{M,1} & \sigma_{M,2} & \cdots & \sigma_{M}^2\\
     \end{matrix}\right)
 $$
+</div>
+
+
+
 通过上式很容易发现要求得 $\beta_i$ ，所有数据都在协方差阵的最后一行（列）
 
 求得这五只股票beta为 
