@@ -568,7 +568,7 @@ m_steps:二叉树的步长。
 1. 计算u，d，P：
 
 $$
-\Delta t=t/m\_steps \\
+\Delta t=t/m_{steps} \\
 $$
 
 $$
@@ -584,7 +584,7 @@ $$
 2. 再通过下式计算最后一期二叉树标的资产价格：
 
 $$
-S_{d^m}=S * d^{m\_steps} \\
+S_{d^m}=S * d^{m_{steps}} \\
 $$
 
 $$
