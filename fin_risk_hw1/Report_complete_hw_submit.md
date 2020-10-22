@@ -1,19 +1,14 @@
-<div align="left">
-    <img src='https://ftp.bmp.ovh/imgs/2020/08/b77a8439ea51e080.jpg' height="50" width="50" >
-</div>
+**姓名：黄之豪**
 
-
-# 一、涉及内容
-
-第一次作业涉及：
-
-- **投资组合理论（第一题）：** 马科维茨（Markowitz）投资组合二次规划求解、蒙特卡洛方法求解有效前沿、资本市场线、动态调整权重
-- **CAPM模型（第二题）：** Beta系数求解、alpha检验、GRS检验
-- **期权定价模型（第三题）：** n步二叉树欧式美式看涨看跌期权定价、Black Scholes公式（BS公式）看涨看跌期权定价
+**学号：20110980005**
 
 
 
-# 二、项目结构及相关说明
+**全部代码和结果详情可见于：**https://github.com/HUANGZHIHAO1994/Financial-risk-management/tree/main/fin_risk_hw1
+
+
+
+# 一、项目结构及相关说明
 
 ## 1. 结构及说明
 
@@ -135,7 +130,7 @@ ubuntu 解决matplotlib中文问题参考：https://www.huuinn.com/archives/533
 
 
 
-# 三、第一题（hw1_1.py）
+# 二、第一题（hw1_1.py）
 
 ## 1. 缺失值填补：
 
@@ -386,7 +381,7 @@ def compute_weight(self, x_matrix, total_days=252, method="Markowitz", starttime
 
 
 
-# 四、第二题（hw1_2.py）
+# 三、第二题（hw1_2.py）
 
 ## 1. 随机抽样5只股票
 
@@ -502,7 +497,7 @@ pval: 0.45687218432061016
 
 
 
-# 五、第三题（hw1_3.py）
+# 四、第三题（hw1_3.py）
 
 ## 1. 前提假设：
 
