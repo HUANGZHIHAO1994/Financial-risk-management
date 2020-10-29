@@ -237,7 +237,8 @@ class InvestmentStrategy:
             end_time = x_matrix_total.iloc[v:k, :].index[-1]
             bar.set_description(f"进入{start_time}--{end_time}权重计算")
 
-            weight = self.compute_weight(df_weight, total_days, method="MontoCarlo", starttime=start_time, endtime=end_time)
+            weight = self.compute_weight(df_weight, total_days, method="MontoCarlo", starttime=start_time,
+                                         endtime=end_time)
             weight_list.append(weight)
         # 保存权重
         filename = os.path.join(os.getcwd(), 'weights')
@@ -252,8 +253,11 @@ class InvestmentStrategy:
     def compare_performance(self, method="Markowitz"):
         print("\033[0;36;m 开始与HS300表现比较，比较策略为 \033[0m \033[0;34;m {} \033[0m".format(method))
         total_compare_matrix = pd.DataFrame(columns=['HS300', 'Portfolio', "Period"])
+        total_compare_matrix_convert_one = pd.DataFrame(columns=['HS300', 'Portfolio', "Period"])
         x_matrix_total_hs300 = self.process_data_contain_hs300(DATAPATH)
         six_map, compare_list = self.get_six_month_map(x_matrix_total_hs300)
+        x_matrix_total_hs300_convert_one = x_matrix_total_hs300.div(x_matrix_total_hs300.iloc[compare_list[0][0]],
+                                                                    axis='columns')
 
         if method == "MontoCarlo_alpha0":
             with open('./weights/weights_{}.pickle'.format("MontoCarlo"), 'rb') as f:
@@ -277,23 +281,32 @@ class InvestmentStrategy:
 
             if period[1] != x_matrix_total_hs300.shape[0]:
                 period_day_yield_matrix = x_matrix_total_hs300.iloc[period[0]:period[1] + 1, :]
+                period_day_matrix_convert_one = x_matrix_total_hs300_convert_one.iloc[period[0]:period[1] + 1, :]
             else:
                 period_day_yield_matrix = x_matrix_total_hs300.iloc[period[0]:period[1], :]
+                period_day_matrix_convert_one = x_matrix_total_hs300_convert_one.iloc[period[0]:period[1], :]
             day_yield_compare_matrix = self.day_yield_compute(period_day_yield_matrix)
+            period_day_matrix_convert_one = period_day_matrix_convert_one.iloc[:-1, :]
             start_time = day_yield_compare_matrix.index[0]
             end_time = day_yield_compare_matrix.index[-1]
 
             weighted_day_yield = (1 - alpha) * (
                 np.matmul(day_yield_compare_matrix.iloc[:, 1:].to_numpy(), weights)) + alpha * RISK_FREE_RATE / 242
+            weighted_day_convert_one = np.matmul(period_day_matrix_convert_one.iloc[:, 1:].to_numpy(), weights)
 
             day_yield_compare_matrix['Portfolio'] = pd.DataFrame(weighted_day_yield,
                                                                  index=day_yield_compare_matrix.index)
+
+            period_day_matrix_convert_one['Portfolio'] = pd.DataFrame(weighted_day_convert_one,
+                                                                      index=day_yield_compare_matrix.index)
             day_yield_compare_matrix.rename(columns={0: 'HS300'}, inplace=True)
+            period_day_matrix_convert_one.rename(columns={0: 'HS300'}, inplace=True)
             period_series = pd.to_datetime(
                 pd.DataFrame(day_yield_compare_matrix.index, columns=['time'])['time'], format='%Y-%m-%d')
             dict_data = {'time': period_series.values}
 
             day_yield_compare_matrix["Period"] = pd.DataFrame(dict_data, index=day_yield_compare_matrix.index)
+            period_day_matrix_convert_one["Period"] = pd.DataFrame(dict_data, index=day_yield_compare_matrix.index)
 
             # 作图和记录平均收益比较
             hs300_mean = np.mean(day_yield_compare_matrix['HS300'].to_numpy())
@@ -315,13 +328,16 @@ class InvestmentStrategy:
             self.plot_performance_compare(day_yield_compare_matrix, start_time, end_time, method)
             if index == 0:
                 total_compare_matrix = day_yield_compare_matrix
+                total_compare_matrix_convert_one = period_day_matrix_convert_one
             else:
                 total_compare_matrix = pd.concat([total_compare_matrix, day_yield_compare_matrix])
+                total_compare_matrix_convert_one = pd.concat(
+                    [total_compare_matrix_convert_one, period_day_matrix_convert_one])
 
-        return total_compare_matrix
+        return total_compare_matrix, total_compare_matrix_convert_one
 
     @staticmethod
-    def plot_performance_compare(yield_matrix, start_time, end_time, method):
+    def plot_performance_compare(yield_matrix, start_time, end_time, method, yield_rate=True):
         hs300 = yield_matrix['HS300'].to_numpy()
         portfolio = yield_matrix['Portfolio'].to_numpy()
         period = yield_matrix["Period"].to_numpy()
@@ -337,15 +353,22 @@ class InvestmentStrategy:
         ax.plot(period, hs300, label='hs300')
         ax.plot(period, portfolio, label='portfolio')
 
-        ax.set(xlabel='日期', ylabel='日收益率',
-               title="HS300与{}投资组合收益比较：{}--{}".format(method, start_time, end_time))
+        if yield_rate:
+            ax.set(xlabel='日期', ylabel='日收益率',
+                   title="HS300与{}投资组合收益比较：{}--{}".format(method, start_time, end_time))
+        else:
+            ax.set(xlabel='日期', ylabel='资产归一化',
+                   title="HS300与{}投资组合比较：{}--{}".format(method, start_time, end_time))
         ax.grid()
         ax.legend()
 
         filename = os.path.join(os.getcwd(), 'images')
         if not os.path.exists(filename):
             os.makedirs(filename)
-        plt.savefig("./images/HS300与{}投资组合收益比较：{}--{}".format(method, start_time, end_time), dpi=300)
+        if yield_rate:
+            plt.savefig("./images/HS300与{}投资组合收益比较：{}--{}".format(method, start_time, end_time), dpi=300)
+        else:
+            plt.savefig("./images/HS300与{}投资组合比较：{}--{}".format(method, start_time, end_time), dpi=300)
         plt.close()
         # plt.show()
 
@@ -364,7 +387,7 @@ if __name__ == '__main__':
     # method = "MontoCarlo"
     # method = "MontoCarlo_alpha0"
     for method in ["Markowitz", "MontoCarlo", "MontoCarlo_alpha0"]:
-        total_compare_yield_matrix = invent_strate.compare_performance(method=method)
+        total_compare_yield_matrix, total_compare_matrix_convert_one = invent_strate.compare_performance(method=method)
         hs300_mean_total = np.mean(total_compare_yield_matrix['HS300'].to_numpy())
         portfolio_mean_total = np.mean(total_compare_yield_matrix['Portfolio'].to_numpy())
         if hs300_mean_total < portfolio_mean_total:
@@ -378,3 +401,5 @@ if __name__ == '__main__':
 
         # 做一个总的投资组合和沪深300比较图
         invent_strate.plot_performance_compare(total_compare_yield_matrix, 20150105, 20191230, method)
+        invent_strate.plot_performance_compare(total_compare_matrix_convert_one, 20150105, 20191230, method,
+                                               yield_rate=False)

@@ -9,8 +9,6 @@
 
 Chrome浏览器扩展程序：[GitHub with MathJax](https://www.crx4chrome.com/crx/119782/) ，打开网址后选择 Available in the [Chrome Web Store >](https://chrome.google.com/webstore/detail/ioemnmodlmafdkllaclgeombjnmnbima?utm_source=www.crx4chrome.com)
 
-或者移步到：https://huangzhihao1994.github.io/posts/financial-risk-management-hw1/
-
 - fork之后下载到本地看
 
 **README.md**  由于公式对齐，矩阵显示等问题，做了HTML兼容，本地查看不了相关公式，可通过项目文件中 **Report_complete.md** 查看
@@ -319,6 +317,14 @@ def compute_weight(self, x_matrix, total_days=252, method="Markowitz", starttime
 
 
 
+来自2020-10-30更新，增加了按照20150105资产价格归一化之后的比较结果：
+
+![HS300与Markowitz投资组合比较：20150105--20191230](https://ftp.bmp.ovh/imgs/2020/10/86e58eb1beb64adf.png)
+
+
+
+
+
 ### 5.2 Monto Carlo方法
 
 这个方法通过求解下式最优化问题获取权重，由于分母有w的二次项，目前只能通过蒙特卡洛数值方法逼近最优解。具体抽样方法为：从 $N(1/50,1)$ 中随机抽取49个权重，最后一个权重通过1减去前49个之和得到。
@@ -386,6 +392,12 @@ def compute_weight(self, x_matrix, total_days=252, method="Markowitz", starttime
 
 
 
+来自2020-10-30更新，增加了按照20150105资产价格归一化之后的比较结果：
+
+![HS300与MontoCarlo投资组合比较：20150105--20191230](https://ftp.bmp.ovh/imgs/2020/10/a3e8d67479addb65.png)
+
+
+
 ### 5.3 Monto Carlo alpha 0方法
 
 由于 2. Monto Carlo方法 中 $\bar{r_{p}}$ 通常接近10%（日收益率10%与$r_{f_{day}}$相差较大），$\alpha$ 数值通常在97%左右（基本全投资无风险资产），因此为了直截了当查看最优市场组合权重表现，这个方法将2中的 $\alpha$ 直接设为0，即只考虑市场组合，不考虑无风险利率
@@ -417,6 +429,10 @@ def compute_weight(self, x_matrix, total_days=252, method="Markowitz", starttime
 | 全部时间： | 20150105 | 20191230 | 0.000217        | -0.01062            | HS300     |
 
 
+
+来自2020-10-30更新，增加了按照20150105资产价格归一化之后的比较结果：
+
+![HS300与MontoCarlo_alpha0投资组合比较：20150105--20191230](https://ftp.bmp.ovh/imgs/2020/10/76ac757ef3910e3d.png)
 
 
 
@@ -722,6 +738,10 @@ $$
 
 
 
+另外，粗看就可以发现，比如：  **601001大同煤业**   在20100723这一天的股价为33.44，下一个交易日20100726这一天股价为16.67，经查阅资料发现该公司2010-07-23股权登记日每10股送10股，但是按照粗略计算日收益则为负数，如此是不妥的。
+
+
+
 鉴于50只股票都是沪市，以下是沪市除权参考价：除权参考价＝（股权登记日收盘价＋配股价×配股率－派息率）／（1＋送股率＋配股率）​。也就是说还可以考虑配股这些。
 
 
@@ -800,4 +820,12 @@ $$
 > 屈依娜, 陈汉文. 现金股利政策、内部控制与市场反应[J]. 金融研究, 2018, 000(005):191-206.
 >
 > 严武, 潘如璐, 石劲. 中国上市公司股利公告效应实证研究:1993-2006[J]. 当代财经, 2009, 000(009):50-55.
+
+
+
+
+
+# 七、Update List
+
+**2020-10-30：**   看到助教上传的比较方法后，增加了HS300和Portfolio **按照20150105** 那一天归一化（简单地将所有比较日期股价和HS300指数除以20150105当天数值）比较图（之前做的是日收益率比较），这种比较作图更直观，但是要得到精确比较数值结果不容易。相关代码改动来自 `compare_performance` 方法中所有含有 "convert_one" 的项。
 
