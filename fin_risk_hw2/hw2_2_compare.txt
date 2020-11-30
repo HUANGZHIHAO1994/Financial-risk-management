@@ -1,0 +1,2 @@
+finale value is: 3.815135785308124
+execution time: 172.07279300689697

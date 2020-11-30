@@ -3,17 +3,13 @@
 </div>
 
 
-# 公式显示问题
+黄之豪 
 
-- 在github上看本页公式
-
-Chrome浏览器扩展程序：[GitHub with MathJax](https://www.crx4chrome.com/crx/119782/) ，打开网址后选择 Available in the [Chrome Web Store >](https://chrome.google.com/webstore/detail/ioemnmodlmafdkllaclgeombjnmnbima?utm_source=www.crx4chrome.com)
-
-- fork之后下载到本地看
-
-**README.md**  由于公式对齐，矩阵显示等问题，做了HTML兼容，本地查看不了相关公式，可通过项目文件中 **Report_complete.md** 查看
+20110980005
 
 
+
+更详细的相关内容会在作业截止提交后上传github：https://github.com/HUANGZHIHAO1994/Financial-risk-management.git
 
 # 一、涉及内容
 
@@ -87,7 +83,6 @@ $$
 
 
 
-<div>
 $$
 Sample\ path_{252\times10000}=\left(\begin{matrix}
         s(t_1)_{1} & s(t_1)_{2} & \cdots & s(t_{1})_{10000}\\
@@ -96,8 +91,6 @@ Sample\ path_{252\times10000}=\left(\begin{matrix}
         s(t_{252})_{1} & s(t_{252})_{2} & \cdots & s(t_{252})_{10000}\\
     \end{matrix}\right)
 $$
-</div>
-
 
 
 本次作业中， $ \Delta t = t_{i+1}-t_{i}=\frac{1}{252} $  ，实现样本路径可通过生成 (252, 10000) 维的标准正态随机数，之后逐行计算 S(t) ，具体可见 `generate_samples` 方法：
@@ -216,10 +209,6 @@ def calculate(stock_matrix, d_st_d_sigma_matrix, standard_normal_matrix):
 ### 4.3 gamma计算
 
 亚式期权 **gamma** 计算使用了 **likelihood ratio method** ，是希腊字母计算中最复杂的，也是最容易出错的，此处使用符号与 **lecturenote6** 中一致，具体推导如下：
-
-
-
-<div>
 $$
 \begin{align*}
 \alpha^{''}(\theta)  
@@ -228,9 +217,6 @@ $$
 & =  E[g(\vec{x}) \frac{\frac{\partial ^{2} f(\vec{x};\theta)}{\partial \theta^{2}}}{f(\vec{x};\theta)}]
 \end{align*}
 $$
-</div>
-
-
 
 #### 4.3.1 错误的做法
 
@@ -258,9 +244,6 @@ $$
 \frac{\partial g(S_1, \cdots, S_m)}{\partial S_0}=\frac{\partial log(g(S_1, \cdots, S_m))}{\partial S_0}g(S_1, \cdots, S_m)
 $$
 
-
-
-<div>
 $$
 \begin{align*}
 \frac{\partial^2 g(S_1, \cdots, S_m)}{\partial S_0^2} 
@@ -270,12 +253,6 @@ $$
 &= \frac{Z_1^2-1-Z_1\sigma \sqrt{\Delta t}}{S_0^2 \sigma^2 \Delta t}g(S_1, \cdots, S_m)
 \end{align*}
 $$
-</div>
-
-
-
-
-
 进而得到
 $$
 \alpha^{''}(\theta) = E[e^{-rT}(\bar{S}-K)^+\frac{Z_1^2-1-Z_1\sigma \sqrt{\Delta t}}{S_0^2 \sigma^2 \Delta t}]
@@ -452,9 +429,3 @@ def longstaff_schwartz_combine_tsitsiklis(stock_matrix):
 3. **注** ：同样的参数，第一次作业美式看跌期权计算结果为：3.7557436745895885，显然 Longstaff Schwartz(2001) 是与该结果最接近的，这与他们思路相同也有关系
 
 
-
-# 五、To Do List
-
-
-
-# 六、Update List
