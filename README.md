@@ -445,7 +445,7 @@ def longstaff_schwartz_combine_tsitsiklis(stock_matrix):
 | ------------------------------------------------------------ | ------------------ |
 | Longstaff_Schwartz (2001)计算用时                            | 2.655221536755562  |
 | Longstaff_Schwartz (2001) price                              | 3.8151357853081094 |
-| Combine of (Longstaff_Schwartz, 2001) and Tsitsiklis et al, 1999) price | 3.8306045815398466 |
+| Combine of (Longstaff_Schwartz, 2001) and (Tsitsiklis et al, 1999) price | 3.8306045815398466 |
 | Tsitsiklis et al. (1999) or the lecturenote5 from Prof. L. Jeff Hong price | 4.4527336640111255 |
 | **LSM.py**                                                   |                    |
 | Longstaff_Schwartz (2001) price                              | 3.815135785308124  |
