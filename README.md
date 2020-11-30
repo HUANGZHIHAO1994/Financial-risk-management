@@ -198,9 +198,13 @@ $$
 \frac{\mathrm{d}}{\mathrm{d} \sigma} S(t_{i})=S(t_{i})(- \sigma t_i + \sqrt{\Delta t}(Z_1+ \cdots +Z_i))
 $$
 综上得到 **vega** 计算式：
+
+<div>
 $$
 \alpha^{'}(\sigma)= E[e^{-rT}\mathbb{1}_{\{ \bar{S} >K \}} \frac{1}{m}\sum_{i=1}^{m} S(t_{i})(- \sigma t_i + \sqrt{\Delta t}(Z_1+ \cdots +Z_i))]
 $$
+</div>
+
 可以看到， **vega** 与 **delta** 计算差别主要在 $ \frac{\mathrm{d}}{\mathrm{d} \sigma} S(t_{i}) $ 上，此处采用在生成样本路径时一起计算 $ \frac{\mathrm{d}}{\mathrm{d} \sigma} S(t_{i}) $ 的方法，详情可见 `generate_samples` 方法中 `d_st_d_sigma_matrix` 和 `calculate` 方法：
 
 ```python
