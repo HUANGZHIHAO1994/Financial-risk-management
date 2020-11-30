@@ -160,9 +160,13 @@ def calculate(stock_matrix, d_st_d_sigma_matrix, standard_normal_matrix):
 ### 4.1 delta计算
 
 亚式期权 **delta** 计算在 **lecturenote6** 中已经给出公式，此处不再重复推导，公式如下：
+
+<div>
 $$
 \alpha^{'}(S_0)=E[e^{-rT}\mathbb{1}_{\{ \bar{S} >K \}} \frac{\bar{S}}{S_0}] \approx \frac{1}{n}\sum_{i=1}^{n} e^{-rT}\mathbb{1}_{\{ \bar{S_i} >K \}}\frac{\bar{S_i}}{S_0}
 $$
+</div>
+
 **delta** 计算相对简单，并不需要新增计算，详情可见 `calculate` 方法：
 
 ```python
